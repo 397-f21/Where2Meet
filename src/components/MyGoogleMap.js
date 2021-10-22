@@ -26,7 +26,9 @@ class MyGoogleMap extends Component {
         center: [],
         zoom: 9,
         draggable: true,
-        places: []
+        places: [],
+        meet_loc_lat: 0,
+        meet_loc_lng: 0
 
     };
 
@@ -58,25 +60,25 @@ class MyGoogleMap extends Component {
 
     rad2degr(rad) { return rad * 180 / Math.PI; }
     degr2rad(degr) { return degr * Math.PI / 180; }
-    getLatLngCenter(latLngInDegr) {
-      var LATIDX = 0;
-      var LNGIDX = 1;
+    getLatLngCenter() { //latLngInDegr) {
+      var places_length = this.state.places.length 
       var sumX = 0;
       var sumY = 0;
       var sumZ = 0;
+    
   
-      for (var i=0; i<latLngInDegr.length; i++) {
-          var lat = this.degr2rad(latLngInDegr[i][LATIDX]);
-          var lng = this.degr2rad(latLngInDegr[i][LNGIDX]);
+      for (var i=0; i<places_length; i++) {
+          var lat = this.degr2rad(this.state.places[i].lat);
+          var lng = this.degr2rad(this.state.places[i].lng);
           // sum of cartesian coordinates
           sumX += Math.cos(lat) * Math.cos(lng);
           sumY += Math.cos(lat) * Math.sin(lng);
           sumZ += Math.sin(lat);
       }
   
-      var avgX = sumX / latLngInDegr.length;
-      var avgY = sumY / latLngInDegr.length;
-      var avgZ = sumZ / latLngInDegr.length;
+      var avgX = sumX / places_length;
+      var avgY = sumY / places_length;
+      var avgZ = sumZ / places_length;
   
       // convert average x, y, z coordinate to latitude and longtitude
       var lng = Math.atan2(avgY, avgX);
@@ -106,6 +108,8 @@ class MyGoogleMap extends Component {
 
     addPlace = (place) => {
 
+
+
         // const newPlace = 
         //   {
         //     place: place,
@@ -118,6 +122,8 @@ class MyGoogleMap extends Component {
         //   places: [...prevState.places, newPlace]
         // }));
         this._generateAddress(place);
+
+        
     };
 
     _generateAddress(place) {
@@ -149,7 +155,12 @@ class MyGoogleMap extends Component {
                       this.setState(prevState => ({
                         places: [...prevState.places, newPlace]
                       }));
-                      console.log("places:", this.state.places);   
+                      console.log("places:", this.state.places);
+                      const coords = this.getLatLngCenter()
+                      this.setState({
+                        meet_loc_lat: coords[0],
+                        meet_loc_lng: coords[1]
+                      });
                 } else {
                     window.alert('No results found');
                 }
@@ -158,6 +169,7 @@ class MyGoogleMap extends Component {
             }
 
         });
+
     }
 
     // Get Current Location Coordinates
@@ -234,11 +246,11 @@ class MyGoogleMap extends Component {
                     onGoogleApiLoaded={({ map, maps }) => this.apiHasLoaded(map, maps)}
                 >
 
-                {/* <Marker
-                    text={this.state.address}
-                    lat={this.state.lat}
-                    lng={this.state.lng}
-                /> */}
+               <Marker
+                    text={"PLACEHOLDER"}
+                    lat={this.state.meet_loc_lat}
+                    lng={this.state.meet_loc_lng}
+                />
 
                 {this.markerRenderer()}
 
