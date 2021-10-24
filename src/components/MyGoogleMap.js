@@ -8,7 +8,7 @@ import {fitBounds} from 'google-map-react';
 import styled from 'styled-components';
 
 import AutoComplete from './Autocomplete';
-import {Marker,Marker2} from './Markers';
+import {Marker, Marker2} from './Markers';
 
 const Wrapper = styled.main`
   width: 100%;
@@ -148,8 +148,8 @@ export class MyGoogleMap extends Component {
                         }
                     this.setState(prevState => ({
                         places: [...prevState.places, newPlace]
-                      }));
-                      console.log("places:", this.state.places);
+                    }));
+                    console.log("places:", this.state.places);
                 } else {
                     window.alert('No results found');
                 }
@@ -194,24 +194,26 @@ export class MyGoogleMap extends Component {
     }
 
     CalculateCenter = () => {
-      return (
-        <>
-        <button className="btn btn-outline-secondary btn-sm"
-                onClick={() => {
-                  const coords = this.getLatLngCenter()
-                  this.setState({
-                    meet_loc_lat: coords[0],
-                    meet_loc_lng: coords[1]
-                  });
-                 }}>
+        return (
+            <>
+                <button className="btn btn-outline-secondary btn-sm"
+                        onClick={() => {
+                            const coords = this.getLatLngCenter()
+                            this.setState({
+                                meet_loc_lat: coords[0],
+                                meet_loc_lng: coords[1],
+                                center: {"lat": coords[0], "lng": coords[1]}
+                            });
+                        }}>
 
-          Calculate Meeting Location
-        </button>
-        <h1> {this.state.meet_loc_lat} {this.state.meet_loc_lng} </h1>
-        </>
-      )
+                    Calculate Meeting Location
+                </button>
+                <h1> {this.state.meet_loc_lat} {this.state.meet_loc_lng} </h1>
+            </>
+        )
 
     }
+
     render() {
         const {
             places, mapApiLoaded, mapInstance, mapApi,
@@ -262,12 +264,11 @@ export class MyGoogleMap extends Component {
                                 {this.addressRenderer()}
                                 {/* <div className="map-details">Address: <span>{this.state.address}</span></div> */}
                             </div>
-                            {this.state.places.length === 0 ? "Add People first to calulate the meeting location" : <this.CalculateCenter/>}
+                            {this.state.places.length === 0 ? "Add People first to calulate the meeting location" :
+                                <this.CalculateCenter/>}
                         </div>
                     )}
                 </div>
-
-
 
 
             </Wrapper>
