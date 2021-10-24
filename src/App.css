@@ -56,3 +56,31 @@
   font-size: 1.2em;
   width: 80%;
 }
+
+.jumbotron {
+  padding: 10px 10px 10px 10px;
+  margin: 0px auto;
+  background: rgb(234, 237, 238);
+  color: black;
+}
+
+.logo {
+  width: 216px;
+  height: 180px;
+}
+
+.scroll {
+  max-height: 20vh;
+  height: 20vh;
+  overflow-y: auto;
+}
+
+.bluePin {
+  width: 38px;
+  height: 37px;
+}
+
+.redPin {
+  width: 38px;
+  height: 37px;
+}

@@ -28,7 +28,8 @@ export class MyGoogleMap extends Component {
         draggable: true,
         places: [],
         meet_loc_lat: null,
-        meet_loc_lng: null
+        meet_loc_lng: null,
+        meet_address: null
 
     };
 
@@ -173,9 +174,9 @@ export class MyGoogleMap extends Component {
 
     addressRenderer() {
         return (
-            <>
+            <> 
                 {this.state.places.map((place, ind) => (
-                    <div className="map-details">Person {ind + 1}: <span>{place.address}</span></div>
+                    <div class="card-text">Person {ind + 1}: <span>{place.address}</span></div>
                 ))}
             </>
         )
@@ -196,23 +197,69 @@ export class MyGoogleMap extends Component {
     CalculateCenter = () => {
         return (
             <>
-                <button className="btn btn-outline-secondary btn-sm"
+                <button className="btn btn-outline-secondary btn-sm m-3"
                         onClick={() => {
                             const coords = this.getLatLngCenter()
+                            this.generateAddressForCenter();
                             this.setState({
                                 meet_loc_lat: coords[0],
                                 meet_loc_lng: coords[1],
-                                center: {"lat": coords[0], "lng": coords[1]}
+                                center: {"lat": coords[0], "lng": coords[1]},
+                                meet_address: this.generateAddressForCenter(coords[0], coords[1])
+
                             });
+                            console.log(this.state.meet_address);
                         }}>
 
                     Calculate Meeting Location
                 </button>
-                <h1> {this.state.meet_loc_lat} {this.state.meet_loc_lng} </h1>
+              
+                {this.state.meet_address &&
+                  <div> 
+                    <h2> <img class="bluePin"
+                                  src="https://icon-library.com/images/pin-icon-png/pin-icon-png-8.jpg"
+                                  alt="new"/> {this.state.meet_address ? "Meet Here:" : ""} </h2>
+                    <div> {this.state.meet_address ? this.state.meet_address : ""}</div>
+                  </div>
+                }
             </>
         )
 
     }
+
+
+    generateAddressForCenter(lat, lng){
+      const {
+          mapApi
+      } = this.state;
+
+      if (!lat) {
+          return;
+      }
+
+      const geocoder = new mapApi.Geocoder;
+
+      console.log("gen called")
+      geocoder.geocode({'location': {lat: lat, lng: lng}}, (results, status) => {
+          console.log(results);
+          console.log(status);
+          if (status === 'OK') {
+              if (results[0]) {
+                  console.log("Meet Location: ", results[0].formatted_address)
+                  this.setState({
+                    meet_address: results[0].formatted_address
+                  });
+                  return results[0].formatted_address;
+              } else {
+                  window.alert('No results found');
+              }
+          } else {
+              window.alert('Geocoder failed due to: ' + status);
+          }
+
+      });
+
+  }
 
     render() {
         const {
@@ -223,7 +270,7 @@ export class MyGoogleMap extends Component {
         return (
             <Wrapper>
                 <div className="row row-header">
-                    <div className="col-6" style={{height: '50vh', width: '50%'}}>
+                    <div className="col-6" style={{height: '65vh', width: '50%'}}>
                         <GoogleMapReact
                             center={this.state.center}
                             zoom={this.state.zoom}
@@ -258,13 +305,14 @@ export class MyGoogleMap extends Component {
                             <div>
                                 <AutoComplete map={mapInstance} mapApi={mapApi} addplace={this.addPlace}/>
                             </div>
-                            <div className="info-wrapper">
-                                {/* <div className="map-details">Latitude: <span>{this.state.lat}</span>, Longitude: <span>{this.state.lng}</span></div>
-                    <div className="map-details">Zoom: <span>{this.state.zoom}</span></div> */}
+                            <div className="card m-2 p-2 scroll">
+                                <h5 class="card-title" ><img class="redPin"
+                                  src="https://icon-library.com/images/pin-icon-png/pin-icon-png-9.jpg"
+                                  alt="new"></img>People:
+                                </h5>
                                 {this.addressRenderer()}
-                                {/* <div className="map-details">Address: <span>{this.state.address}</span></div> */}
-                            </div>
-                            {this.state.places.length === 0 ? "Add People first to calulate the meeting location" :
+                            </div>  
+                            {this.state.places.length === 0 ? "Add people's location to calulate the meeting location" :
                                 <this.CalculateCenter/>}
                         </div>
                     )}
