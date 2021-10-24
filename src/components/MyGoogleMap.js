@@ -9,13 +9,12 @@ import styled from 'styled-components';
 import AutoComplete from './Autocomplete';
 import Marker from './Markers';
 
-
 const Wrapper = styled.main`
   width: 100%;
   height: 100%;
 `;
 
-class MyGoogleMap extends Component {
+export class MyGoogleMap extends Component {
 
 
     state = {
@@ -27,8 +26,8 @@ class MyGoogleMap extends Component {
         zoom: 9,
         draggable: true,
         places: [],
-        meet_loc_lat: 0,
-        meet_loc_lng: 0
+        meet_loc_lat: null,
+        meet_loc_lng: null
 
     };
 
@@ -65,7 +64,6 @@ class MyGoogleMap extends Component {
       var sumX = 0;
       var sumY = 0;
       var sumZ = 0;
-    
   
       for (var i=0; i<places_length; i++) {
           var lat = this.degr2rad(this.state.places[i].lat);
@@ -86,7 +84,7 @@ class MyGoogleMap extends Component {
       var lat = Math.atan2(avgZ, hyp);
   
       return [this.rad2degr(lat), this.rad2degr(lng)];
-  }
+    }
 
 
     _onClick = (value) => {
@@ -156,11 +154,11 @@ class MyGoogleMap extends Component {
                         places: [...prevState.places, newPlace]
                       }));
                       console.log("places:", this.state.places);
-                      const coords = this.getLatLngCenter()
-                      this.setState({
-                        meet_loc_lat: coords[0],
-                        meet_loc_lng: coords[1]
-                      });
+                      // const coords = this.getLatLngCenter()
+                      // this.setState({
+                      //   meet_loc_lat: coords[0],
+                      //   meet_loc_lng: coords[1]
+                      // });
                 } else {
                     window.alert('No results found');
                 }
@@ -213,6 +211,25 @@ class MyGoogleMap extends Component {
       )
     }
 
+    CalculateCenter = () => {    
+      return (
+        <>
+        <button className="btn btn-outline-secondary btn-sm"
+                onClick={() => {
+                  const coords = this.getLatLngCenter()
+                  this.setState({
+                    meet_loc_lat: coords[0],
+                    meet_loc_lng: coords[1]
+                  });
+                 }}>
+    
+          Calculate Meeting Location
+        </button>
+        <h1> {this.state.meet_loc_lat} {this.state.meet_loc_lng} </h1>
+        </>
+      )
+    
+    }
     render() {
         const {
             places, mapApiLoaded, mapInstance, mapApi,
@@ -229,6 +246,7 @@ class MyGoogleMap extends Component {
                   </div>
                 )}
                 <GoogleMapReact
+                    className="map"
                     center={this.state.center}
                     zoom={this.state.zoom}
                     draggable={this.state.draggable}
@@ -245,18 +263,16 @@ class MyGoogleMap extends Component {
                     yesIWantToUseGoogleMapApiInternals
                     onGoogleApiLoaded={({ map, maps }) => this.apiHasLoaded(map, maps)}
                 >
-
-               <Marker
+                { this.state.meet_loc_lat && this.state.meet_loc_lng &&
+                  <Marker
                     text={"PLACEHOLDER"}
                     lat={this.state.meet_loc_lat}
                     lng={this.state.meet_loc_lng}
-                />
+                  />
+                }
 
                 {this.markerRenderer()}
-
-
                 </GoogleMapReact>
-
                 <div className="info-wrapper">
                     {/* <div className="map-details">Latitude: <span>{this.state.lat}</span>, Longitude: <span>{this.state.lng}</span></div>
                     <div className="map-details">Zoom: <span>{this.state.zoom}</span></div> */}
@@ -264,6 +280,7 @@ class MyGoogleMap extends Component {
                     {/* <div className="map-details">Address: <span>{this.state.address}</span></div> */}
                 </div>
 
+                {this.state.places.length === 0 ? "Add People first to calulate the meeting location" : <this.CalculateCenter/>}
 
             </Wrapper >
         );
