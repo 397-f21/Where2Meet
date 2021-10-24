@@ -1,4 +1,4 @@
-// Autocomplete.js
+// Autocomplete2.js
 import React, { Component } from 'react';
 import styled from 'styled-components';
 
@@ -11,7 +11,7 @@ const Wrapper = styled.div`
   text-align:center;
 `;
 
-class AutoComplete extends Component {
+class AutoComplete2 extends Component {
     constructor(props) {
         super(props);
         this.clearSearchBox = this.clearSearchBox.bind(this);
@@ -74,4 +74,4 @@ class AutoComplete extends Component {
     }
 }
 
-export default AutoComplete;
+export default AutoComplete2;
