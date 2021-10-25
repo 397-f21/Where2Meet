@@ -174,7 +174,7 @@ export class MyGoogleMap extends Component {
 
     addressRenderer() {
         return (
-            <> 
+            <>
                 {this.state.places.map((place, ind) => (
                     <div class="card-text"><b>Person {ind + 1}:</b> <span>{place.address}</span></div>
                 ))}
@@ -208,6 +208,12 @@ export class MyGoogleMap extends Component {
                                 meet_address: this.generateAddressForCenter(coords[0], coords[1])
 
                             });
+                            var markers = this.state.places;//some array
+                            var bounds = new window.google.maps.LatLngBounds();
+                            for (var i = 0; i < markers.length; i++) {
+                                bounds.extend(markers[i]);
+                            }
+                            this.state.mapInstance.fitBounds(bounds);
                             console.log(this.state.meet_address);
                         }}>
 
@@ -219,38 +225,38 @@ export class MyGoogleMap extends Component {
     }
 
 
-    generateAddressForCenter(lat, lng){
-      const {
-          mapApi
-      } = this.state;
+    generateAddressForCenter(lat, lng) {
+        const {
+            mapApi
+        } = this.state;
 
-      if (!lat) {
-          return;
-      }
+        if (!lat) {
+            return;
+        }
 
-      const geocoder = new mapApi.Geocoder;
+        const geocoder = new mapApi.Geocoder;
 
-      console.log("gen called")
-      geocoder.geocode({'location': {lat: lat, lng: lng}}, (results, status) => {
-          console.log(results);
-          console.log(status);
-          if (status === 'OK') {
-              if (results[0]) {
-                  console.log("Meet Location: ", results[0].formatted_address)
-                  this.setState({
-                    meet_address: results[0].formatted_address
-                  });
-                  return results[0].formatted_address;
-              } else {
-                  window.alert('No results found');
-              }
-          } else {
-              window.alert('Geocoder failed due to: ' + status);
-          }
+        console.log("gen called")
+        geocoder.geocode({'location': {lat: lat, lng: lng}}, (results, status) => {
+            console.log(results);
+            console.log(status);
+            if (status === 'OK') {
+                if (results[0]) {
+                    console.log("Meet Location: ", results[0].formatted_address)
+                    this.setState({
+                        meet_address: results[0].formatted_address
+                    });
+                    return results[0].formatted_address;
+                } else {
+                    window.alert('No results found');
+                }
+            } else {
+                window.alert('Geocoder failed due to: ' + status);
+            }
 
-      });
+        });
 
-  }
+    }
 
     render() {
         const {
@@ -297,9 +303,9 @@ export class MyGoogleMap extends Component {
                                 <AutoComplete map={mapInstance} mapApi={mapApi} addplace={this.addPlace}/>
                             </div>
                             <div className="card m-2 p-2 scroll">
-                                <h5 class="card-title" ><img class="redPin"
-                                  src="https://icon-library.com/images/pin-icon-png/pin-icon-png-9.jpg"
-                                  alt="new"></img>People:
+                                <h5 class="card-title"><img class="redPin"
+                                                            src="https://icon-library.com/images/pin-icon-png/pin-icon-png-9.jpg"
+                                                            alt="new"></img>People:
                                 </h5>
                                 {this.addressRenderer()}
                             </div>
@@ -309,15 +315,15 @@ export class MyGoogleMap extends Component {
                                     <this.CalculateCenter/>}
                             </div>
 
-                            {this.state.meet_address === null  ? '' :
+                            {this.state.meet_address === null ? '' :
                                 <div className="card m-2 p-2 scroll align-items-center justify-content-center">
                                     {this.state.meet_address &&
-                                        <div> 
-                                            <h2> <img class="bluePin"
-                                                        src="https://icon-library.com/images/pin-icon-png/pin-icon-png-8.jpg"
-                                                        alt="new"/> {this.state.meet_address ? "Meet Here:" : ""} </h2>
-                                            <div> {this.state.meet_address ? this.state.meet_address : ""}</div>
-                                        </div>
+                                    <div>
+                                        <h2><img class="bluePin"
+                                                 src="https://icon-library.com/images/pin-icon-png/pin-icon-png-8.jpg"
+                                                 alt="new"/> {this.state.meet_address ? "Meet Here:" : ""} </h2>
+                                        <div> {this.state.meet_address ? this.state.meet_address : ""}</div>
+                                    </div>
                                     }
                                 </div>
                             }
