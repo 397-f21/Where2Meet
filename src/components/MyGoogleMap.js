@@ -176,7 +176,7 @@ export class MyGoogleMap extends Component {
         return (
             <> 
                 {this.state.places.map((place, ind) => (
-                    <div class="card-text">Person {ind + 1}: <span>{place.address}</span></div>
+                    <div class="card-text"><b>Person {ind + 1}:</b> <span>{place.address}</span></div>
                 ))}
             </>
         )
@@ -213,15 +213,6 @@ export class MyGoogleMap extends Component {
 
                     Calculate Meeting Location
                 </button>
-              
-                {this.state.meet_address &&
-                  <div> 
-                    <h2> <img class="bluePin"
-                                  src="https://icon-library.com/images/pin-icon-png/pin-icon-png-8.jpg"
-                                  alt="new"/> {this.state.meet_address ? "Meet Here:" : ""} </h2>
-                    <div> {this.state.meet_address ? this.state.meet_address : ""}</div>
-                  </div>
-                }
             </>
         )
 
@@ -311,9 +302,25 @@ export class MyGoogleMap extends Component {
                                   alt="new"></img>People:
                                 </h5>
                                 {this.addressRenderer()}
-                            </div>  
-                            {this.state.places.length === 0 ? "Add people's location to calulate the meeting location" :
-                                <this.CalculateCenter/>}
+                            </div>
+
+                            <div>
+                                {this.state.places.length < 2 ? "Add at least 2 locations to calculate the meeting location" :
+                                    <this.CalculateCenter/>}
+                            </div>
+
+                            {this.state.meet_address === null  ? '' :
+                                <div className="card m-2 p-2 scroll align-items-center justify-content-center">
+                                    {this.state.meet_address &&
+                                        <div> 
+                                            <h2> <img class="bluePin"
+                                                        src="https://icon-library.com/images/pin-icon-png/pin-icon-png-8.jpg"
+                                                        alt="new"/> {this.state.meet_address ? "Meet Here:" : ""} </h2>
+                                            <div> {this.state.meet_address ? this.state.meet_address : ""}</div>
+                                        </div>
+                                    }
+                                </div>
+                            }
                         </div>
                     )}
                 </div>
