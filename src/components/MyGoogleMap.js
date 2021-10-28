@@ -1,5 +1,5 @@
 // MyGoogleMaps.js
-import React, { useState, useEffect } from 'react';
+import React, {useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import GoogleMapReact from 'google-map-react';
@@ -27,7 +27,6 @@ const degr2rad = (degr) => {
 function MyGoogleMap() {
     useEffect(() => {
         setCenter([42.0494669, -87.688195]);
-        setCurrentCoordinates([42.0494669, -87.688195]);
     }, []);
 
     const [mapState, setMapState] = useState({
@@ -43,25 +42,9 @@ function MyGoogleMap() {
         meet_address: null
     })
 
-    const [currentCoordinates, setCurrentCoordinates] = useState([]);
-
     const [center, setCenter] = useState([]);
-
-    const [draggable, setDraggable] = useState(true);
-
     const [zoom, setZoom] = useState(9);
-
     const [places, setPlaces] = useState([]);
-
-    const onMarkerInteraction = (childKey, childProps, mouse) => {
-        setDraggable(false);
-        setCurrentCoordinates([mouse.lat, mouse.lng])
-    }
-
-    const onMarkerInteractionMouseUp = (childKey, childProps, mouse) => {
-        setDraggable(true);
-        _generateAddress();
-    }
 
     const _onChange = ({ center, zoom }) => {
         console.log("center:", center);
@@ -76,7 +59,7 @@ function MyGoogleMap() {
             return;
         }
 
-        const geocoder = new mapApi.Geocoder;
+        const geocoder = new mapApi.Geocoder();
         const lat = place.geometry.location.lat();
         const lng = place.geometry.location.lng();
 
@@ -85,7 +68,7 @@ function MyGoogleMap() {
             console.log(status);
             if (status === 'OK') {
                 if (results[0]) {
-                    setZoom(12);
+                    setZoom(15);
                     const newPlace =
                     {
                         place: place,
@@ -103,8 +86,8 @@ function MyGoogleMap() {
             }
         });
     }
-    //I wanna change this function its outdated (rob)
-    const getLatLngCenter = () => { //latLngInDegr) {
+
+    const getLatLngCenter = () => {
         var places_length = places.length
         var sumX = 0;
         var sumY = 0;
@@ -112,7 +95,6 @@ function MyGoogleMap() {
 
         var lat;
         var lng
-
 
         for (var i = 0; i < places_length; i++) {
             lat = degr2rad(places[i].lat);
@@ -134,10 +116,6 @@ function MyGoogleMap() {
         lat = Math.atan2(avgZ, hyp);
 
         return [rad2degr(lat), rad2degr(lng)];
-    }
-
-    const _onClick = (value) => {
-        setCurrentCoordinates([value.lat, value.lng])
     }
 
     const apiHasLoaded = (map, maps) => {
@@ -178,7 +156,6 @@ function MyGoogleMap() {
         )
     }
 
-
     const CalculateCenter = () => {
         return (
             <>
@@ -215,7 +192,7 @@ function MyGoogleMap() {
             return;
         }
 
-        const geocoder = new mapApi.Geocoder;
+        const geocoder = new mapApi.Geocoder();
 
         console.log("gen called")
         geocoder.geocode({ 'location': { lat: lat, lng: lng } }, (results, status) => {
@@ -238,6 +215,7 @@ function MyGoogleMap() {
             }
         });
     }
+
     return (
         <Wrapper>
             <div className="row row-header">
@@ -245,13 +223,8 @@ function MyGoogleMap() {
                     <GoogleMapReact
                         center={center}
                         zoom={zoom}
-                        draggable={draggable}
                         onChange={_onChange}
-                        onChildMouseDown={onMarkerInteraction}
-                        onChildMouseUp={onMarkerInteractionMouseUp}
-                        onChildMouseMove={onMarkerInteraction}
                         onChildClick={() => console.log('child click')}
-                        onClick={_onClick}
                         bootstrapURLKeys={{
                             key: 'AIzaSyB3L47aJjmVQz2c0hoDP6WYD-qRaNKdnQU',
                             libraries: ['places', 'geometry'],
@@ -306,9 +279,5 @@ function MyGoogleMap() {
             </div>
         </Wrapper>
     );
-
 }
-
-
-
 export default MyGoogleMap;
