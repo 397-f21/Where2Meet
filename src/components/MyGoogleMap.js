@@ -87,7 +87,7 @@ function MyGoogleMap() {
         });
     }
 
-    const getLatLngCenter = () => { //latLngInDegr) {
+    const getLatLngCenter = () => {
         var places_length = places.length
         var sumX = 0;
         var sumY = 0;
