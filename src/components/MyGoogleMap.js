@@ -3,6 +3,7 @@ import React, {useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import GoogleMapReact from 'google-map-react';
+
 import styled from 'styled-components';
 
 import AutoComplete from './Autocomplete';
@@ -279,5 +280,4 @@ function MyGoogleMap() {
         </Wrapper>
     );
 }
-
 export default MyGoogleMap;
