@@ -1,15 +1,6 @@
 // Autocomplete.js
 import React, { Component } from 'react';
-import styled from 'styled-components';
-
-const Wrapper = styled.div`
-  position: relative;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  padding: 20px;
-  text-align:center;
-`;
+import { AutoCompleteWrapper } from '../utils/wrappers';
 
 class AutoComplete extends Component {
     constructor(props) {
@@ -57,21 +48,23 @@ class AutoComplete extends Component {
 
     render() {
         return (
-            <Wrapper>
-                <div> 
-                  <input
-                      className="search-input"
-                      ref={(ref) => {
-                          this.searchInput = ref;
-                      }}
-                      type="text"
-                      onFocus={this.clearSearchBox}
-                      placeholder="Enter a location"
-                  />
+            <AutoCompleteWrapper>
+                <div>
+                    <input
+                        className="search-input"
+                        ref={(ref) => {
+                            this.searchInput = ref;
+                        }}
+                        type="text"
+                        onFocus={this.clearSearchBox}
+                        placeholder="Enter a location"
+                    />
                 </div>
-            </Wrapper>
+            </AutoCompleteWrapper>
         );
     }
 }
 
 export default AutoComplete;
+
+// export default function Autocomplete

@@ -5,7 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import GoogleMapReact from 'google-map-react';
 
 import { Marker, Marker2 } from './Markers';
-import { Wrapper } from './utils';
+import { MapWrapper } from '../utils/wrappers';
 
 import AddressSidebar from './AddressSidebar';
 
@@ -62,7 +62,7 @@ function MyGoogleMap() {
     }
 
     return (
-        <Wrapper>
+        <MapWrapper>
             <div className="row row-header">
                 <div className="col-6" style={{ height: '65vh', width: '50%' }}>
                     <GoogleMapReact
@@ -90,7 +90,7 @@ function MyGoogleMap() {
                     <AddressSidebar mapState={mapState} meetState={meetState} setMeetState={setMeetState} places={places} setPlaces={setPlaces} setCenter={setCenter} setZoom={setZoom} />
                 </div>
             </div>
-        </Wrapper>
+        </MapWrapper>
     );
 }
 export default MyGoogleMap;

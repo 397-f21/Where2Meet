@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { rad2degr, degr2rad } from './utils';
+import { rad2degr, degr2rad } from '../utils/utils';
 
 export default function CalculateCenter({ places, mapState, setMeetState, setCenter }) {
 
