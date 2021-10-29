@@ -18,7 +18,6 @@ export default function CalculateCenter({ places, mapState, setMeetState, setCen
         for (var i = 0; i < places_length; i++) {
             lat = degr2rad(places[i].lat);
             lng = degr2rad(places[i].lng);
-            // sum of cartesian coordinates
             sumX += Math.cos(lat) * Math.cos(lng);
             sumY += Math.cos(lat) * Math.sin(lng);
             sumZ += Math.sin(lat);
@@ -27,8 +26,6 @@ export default function CalculateCenter({ places, mapState, setMeetState, setCen
         var avgX = sumX / places_length;
         var avgY = sumY / places_length;
         var avgZ = sumZ / places_length;
-
-        // convert average x, y, z coordinate to latitude and longtitude
 
         lng = Math.atan2(avgY, avgX);
         var hyp = Math.sqrt(avgX * avgX + avgY * avgY);
@@ -86,7 +83,7 @@ export default function CalculateCenter({ places, mapState, setMeetState, setCen
 
     return (
         <>
-            <button className="btn btn-outline-secondary btn-sm m-3"
+            <button data-testid="calculateButton" className="btn btn-outline-secondary btn-sm m-3"
                 onClick={onCalculate}>
                 Calculate Meeting Location
             </button>

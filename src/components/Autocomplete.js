@@ -66,5 +66,3 @@ class AutoComplete extends Component {
 }
 
 export default AutoComplete;
-
-// export default function Autocomplete
