@@ -4,8 +4,9 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 import GoogleMapReact from 'google-map-react';
 
-import {Marker, Marker2} from './Markers';
 import {MapWrapper} from '../utils/wrappers';
+
+import { LocationMarkerRenderer, MeetMarkerRenderer } from './MarkersRenderer';
 
 import AddressSidebar from './AddressSidebar';
 
@@ -49,19 +50,6 @@ function MyGoogleMap() {
         });
     };
 
-
-    const markerRenderer = () => {
-        return (
-            places.map((place, ind) => (
-                <Marker
-                    text={place.address}
-                    lat={place.lat}
-                    lng={place.lng}
-                />
-            ))
-        )
-    }
-
     return (
         <MapWrapper>
             <div className="row row-header">
@@ -79,12 +67,8 @@ function MyGoogleMap() {
                         onGoogleApiLoaded={({map, maps}) => apiHasLoaded(map, maps)}
                     >
 
-                        <Marker2
-                            text={"PLACEHOLDER"}
-                            lat={meetState.meet_loc_lat}
-                            lng={meetState.meet_loc_lng}
-                        />
-                        {markerRenderer()}
+                        {MeetMarkerRenderer(meetState)}
+                        {LocationMarkerRenderer(places)}
                     </GoogleMapReact>
                 </div>
                 <div className="col-6">

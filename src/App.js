@@ -3,6 +3,7 @@ import React, { useState, useCallback, useEffect } from 'react';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import MyGoogleMap from './components/MyGoogleMap';
+import { Marker2 } from './components/Markers';
 
 function App() {
 
@@ -22,6 +23,12 @@ function App() {
             </header>
             <div className="main-wrapper">
                 <MyGoogleMap />
+
+                <Marker2 data-testid="meetMarker"
+                text={"PLACEHOLDER"}
+                lat={10}
+                lng={10}
+                />
             </div>
         </div>
     );
