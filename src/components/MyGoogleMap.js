@@ -1,11 +1,11 @@
 // MyGoogleMaps.js
-import React, { useState, useEffect } from 'react';
+import React, {useState, useEffect} from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import GoogleMapReact from 'google-map-react';
 
-import { Marker, Marker2 } from './Markers';
-import { MapWrapper } from '../utils/wrappers';
+import {Marker, Marker2} from './Markers';
+import {MapWrapper} from '../utils/wrappers';
 
 import AddressSidebar from './AddressSidebar';
 
@@ -26,7 +26,8 @@ function MyGoogleMap() {
     const [meetState, setMeetState] = useState({
         meet_loc_lat: null,
         meet_loc_lng: null,
-        meet_address: null
+        meet_address: null,
+        meet_types: null
     })
 
     const [center, setCenter] = useState([]);
@@ -64,18 +65,18 @@ function MyGoogleMap() {
     return (
         <MapWrapper>
             <div className="row row-header">
-                <div className="col-6" style={{ height: '65vh', width: '50%' }}>
+                <div className="col-6" style={{height: '65vh', width: '50%'}}>
                     <GoogleMapReact
                         center={center}
                         zoom={zoom}
-                        onChange={({ center, zoom }) => onMapChange(center, zoom)}
+                        onChange={({center, zoom}) => onMapChange(center, zoom)}
                         onChildClick={() => console.log('child click')}
                         bootstrapURLKeys={{
                             key: 'AIzaSyB3L47aJjmVQz2c0hoDP6WYD-qRaNKdnQU',
                             libraries: ['places', 'geometry'],
                         }}
                         yesIWantToUseGoogleMapApiInternals
-                        onGoogleApiLoaded={({ map, maps }) => apiHasLoaded(map, maps)}
+                        onGoogleApiLoaded={({map, maps}) => apiHasLoaded(map, maps)}
                     >
 
                         <Marker2
@@ -87,10 +88,12 @@ function MyGoogleMap() {
                     </GoogleMapReact>
                 </div>
                 <div className="col-6">
-                    <AddressSidebar mapState={mapState} meetState={meetState} setMeetState={setMeetState} places={places} setPlaces={setPlaces} setCenter={setCenter} setZoom={setZoom} />
+                    <AddressSidebar mapState={mapState} meetState={meetState} setMeetState={setMeetState}
+                                    places={places} setPlaces={setPlaces} setCenter={setCenter} setZoom={setZoom}/>
                 </div>
             </div>
         </MapWrapper>
     );
 }
+
 export default MyGoogleMap;

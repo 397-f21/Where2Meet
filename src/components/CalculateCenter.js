@@ -1,8 +1,8 @@
 import React from 'react';
 
-import { rad2degr, degr2rad } from '../utils/utils';
+import {rad2degr, degr2rad} from '../utils/utils';
 
-export default function CalculateCenter({ places, mapState, setMeetState, setCenter }) {
+export default function CalculateCenter({places, mapState, setMeetState, setCenter}) {
 
     if (places.length < 2) return "Add at least 2 locations to calculate the meeting location";
 
@@ -40,19 +40,26 @@ export default function CalculateCenter({ places, mapState, setMeetState, setCen
         } = mapState;
 
         if (!lat || !lng) {
-            return;
+            return '';
         }
 
         const geocoder = new mapApi.Geocoder();
 
-        geocoder.geocode({ 'location': { lat: lat, lng: lng } }, (results, status) => {
+        geocoder.geocode({'location': {lat: lat, lng: lng}}, (results, status) => {
             if (status === 'OK') {
                 if (results[0]) {
+                    var type = results[0].types;
+                    console.log("Meet Location Detail: ", type);
+                    // plus-code implies it's not a valid street address.
+                    if (type.includes('plus_code')) {
+                        // window.alert('You are in the middle of no where');
+                    }
                     console.log("Meet Location: ", results[0].formatted_address)
                     setMeetState({
                         meet_loc_lat: lat,
                         meet_loc_lng: lng,
-                        meet_address: results[0].formatted_address
+                        meet_address: results[0].formatted_address,
+                        meet_types: results[0].types
                     });
                     return results[0].formatted_address;
                 } else {
@@ -84,7 +91,7 @@ export default function CalculateCenter({ places, mapState, setMeetState, setCen
     return (
         <>
             <button data-testid="calculateButton" className="btn btn-outline-secondary btn-sm m-3"
-                onClick={onCalculate}>
+                    onClick={onCalculate}>
                 Calculate Meeting Location
             </button>
         </>
