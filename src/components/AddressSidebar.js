@@ -63,11 +63,7 @@ export default function AddressSidebar({mapState, meetState, setMeetState, place
                                      setCenter={setCenter}/>
                 </div>
 
-                {meetState.meet_address === null ? '' :
-                    <div className="card m-2 p-2 scroll align-items-center justify-content-center">
-                        <MeetingLocation meetState={meetState}></MeetingLocation>
-                    </div>
-                }
+                <MeetingLocation meetState={meetState}></MeetingLocation>
             </>
         )
     } else return (<></>);
