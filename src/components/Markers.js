@@ -20,7 +20,7 @@ Marker.propTypes = {
 };
 
 export const Marker2 = ({ text, onClick }) => (
-    <CenterPinWrapper
+    <CenterPinWrapper data-testid="meetMarker"
         alt={text}
         onClick={onClick}
     />
