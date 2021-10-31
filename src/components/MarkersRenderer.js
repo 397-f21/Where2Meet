@@ -12,7 +12,7 @@ export const LocationMarkerRenderer = (places) => {
     )
 }
 
-export const MeetMarkerRenderer = ( { meetState } ) => {
+export const MeetMarkerRenderer = ( meetState ) => {
     if (meetState) {
         return (
             <Marker2 data-testid="meetMarker"

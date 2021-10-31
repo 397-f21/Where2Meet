@@ -23,12 +23,6 @@ function App() {
             </header>
             <div className="main-wrapper">
                 <MyGoogleMap />
-
-                <Marker2 data-testid="meetMarker"
-                text={"PLACEHOLDER"}
-                lat={10}
-                lng={10}
-                />
             </div>
         </div>
     );
