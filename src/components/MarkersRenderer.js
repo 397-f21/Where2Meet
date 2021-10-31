@@ -15,7 +15,7 @@ export const LocationMarkerRenderer = (places) => {
 export const MeetMarkerRenderer = ( meetState ) => {
     if (meetState) {
         return (
-            <Marker2 data-testid="meetMarker"
+            <Marker2
                 text={"PLACEHOLDER"}
                 lat={meetState.meet_loc_lat}
                 lng={meetState.meet_loc_lng}
