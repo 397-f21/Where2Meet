@@ -1,9 +1,8 @@
-import React, { useState, useCallback, useEffect } from 'react';
+import React from 'react';
 
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import MyGoogleMap from './components/MyGoogleMap';
-import { Marker2 } from './components/Markers';
 
 function App() {
 

@@ -1,14 +1,46 @@
-import {render} from "@testing-library/react";
-import CalculateCenter from  '../components/CalculateCenter';
-import { MeetMarkerRenderer } from "../components/MarkersRenderer";
+import {queryAllByTestId, queryByTestId, render} from "@testing-library/react";
+import { LocationMarkerRenderer, MeetMarkerRenderer } from "../components/MarkersRenderer";
 
 describe("Markers Renderer Test", () => {
-    it("should create a meeting marker after a meeting location is generated", () => {
-        // Checks to make sure that at least 2 locations are entered so that button appears
-        var {queryByTestId} = render(<CalculateCenter places={[1, 2]}/>);
-        const input = queryByTestId("calculateButton");
-        expect(input).toBeTruthy();
+    it("should create one location marker for one location", () => {
+        const places = [
+            {
+                address: "855 Hinman Ave.",
+                lat: 10,
+                lng: 20
+            }
+        ]   
+        var {queryByTestId} = render(LocationMarkerRenderer(places));
+        const text = queryByTestId("locationMarker");
+        expect(text).toBeTruthy();
+    })
 
+    it("should create two location markers for two locations", () => {
+        const places = [
+            {
+                address: "855 Hinman Ave.",
+                lat: 10,
+                lng: 20
+            },
+            {
+                address: "533 Davis St",
+                lat: 20,
+                lng: 30
+            }
+        ]   
+        var {queryAllByTestId} = render(LocationMarkerRenderer(places));
+        const elements = queryAllByTestId("locationMarker");
+        expect(elements).toHaveLength(2);
+    })
+
+    it("should have no location markers for no locations", () => {
+        const places = []   
+        var {queryByTestId} = render(LocationMarkerRenderer(places));
+        const elements = queryByTestId("locationMarker");
+        expect(elements).toBeNull();
+    })
+
+    it("should create a meeting marker after a meeting location is generated", () => {
         var {queryByTestId} = render(<MeetMarkerRenderer meetState={
             {
                 meet_loc_lat: 10,
