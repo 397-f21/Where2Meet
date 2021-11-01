@@ -6,9 +6,11 @@ import GoogleMapReact from 'google-map-react';
 
 import {MapWrapper} from '../utils/wrappers';
 
-import { LocationMarkerRenderer, MeetMarkerRenderer } from './MarkersRenderer';
+import {LocationMarkerRenderer, MeetMarkerRenderer} from './MarkersRenderer';
 
 import AddressSidebar from './AddressSidebar';
+
+import NearbySearch from "./NearbySearch";
 
 
 // Get Current Location Coordinates
@@ -60,7 +62,8 @@ function MyGoogleMap() {
                         onChange={({center, zoom}) => onMapChange(center, zoom)}
                         onChildClick={() => console.log('child click')}
                         bootstrapURLKeys={{
-                            key: 'AIzaSyB3L47aJjmVQz2c0hoDP6WYD-qRaNKdnQU',
+                            // key: 'AIzaSyB3L47aJjmVQz2c0hoDP6WYD-qRaNKdnQU',
+                            key: 'AIzaSyC2zd1sMFSwFobbSa4QBTrYfY2NSbD7R6Q', //Gefei
                             libraries: ['places', 'geometry'],
                         }}
                         yesIWantToUseGoogleMapApiInternals
@@ -75,6 +78,13 @@ function MyGoogleMap() {
                     <AddressSidebar mapState={mapState} meetState={meetState} setMeetState={setMeetState}
                                     places={places} setPlaces={setPlaces} setCenter={setCenter} setZoom={setZoom}/>
                 </div>
+                {mapState.mapApiLoaded ?
+                    <NearbySearch lat={meetState.meet_loc_lat} lng={meetState.meet_loc_lng} radius={1500}
+                                  type={'restaurant'} keyword={''} map={mapState.mapInstance}></NearbySearch>
+                    : <></>
+                }
+
+
             </div>
         </MapWrapper>
     );
