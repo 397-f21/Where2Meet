@@ -51,7 +51,8 @@ function MyGoogleMap() {
             mapApi: maps,
         });
     };
-    const key = useData('Google_API_Key/Gefei_Tan')[0];
+    const key = useData('Google_API_Key/Gan_Qiu')[0];
+    console.log(key);
     if (!key) {
         return null;
     }
