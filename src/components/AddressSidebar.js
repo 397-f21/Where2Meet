@@ -4,9 +4,14 @@ import CalculateCenter from "./CalculateCenter";
 import MeetingLocation from "./MeetingLocation";
 import AddressRenderer from './AddressRenderer';
 import NearbySearch from "./NearbySearch";
+import { set } from "@firebase/database";
 
 
 export default function AddressSidebar({ mapState, meetState, setMeetState, places, setPlaces, recoms, setRecoms, setCenter, setZoom }) {
+    const recenter = (lat, lng) => {
+        setZoom(18);
+        setCenter([lat, lng]);
+    }
 
     const addPlace = (place, mapState, places, setPlaces, setZoom) => {
         const { mapApi } = mapState;
@@ -60,11 +65,16 @@ export default function AddressSidebar({ mapState, meetState, setMeetState, plac
                 <div className="card m-2 p-2 scroll">
                     <NearbySearch meetState={meetState} radius={500} setRecoms={setRecoms}
                                   type={'restaurant'} keyword={''} mapState={mapState}></NearbySearch>
+                    
+                    <div class="row m-1">
+
                     {recoms.map((recom) => (
-                        <div>
+                        <div className="card p-1 col-md-6 col-sm-12" onClick={() => {recenter(recom.lat(), recom.lng())}}>
                             {recom.name}
                         </div>
                     ))}
+                    </div>
+
                 </div>
             </>
         )

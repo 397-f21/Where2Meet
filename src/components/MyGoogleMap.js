@@ -74,7 +74,6 @@ function MyGoogleMap() {
 
                     {MeetMarkerRenderer(meetState)}
                     {LocationMarkerRenderer(places)}
-                    {/* {LocationMarkerRenderer(recoms)} */}
                     {RecommendationsMarkerRenderer(recoms)}
                     </GoogleMapReact>
                 </div>
