@@ -35,6 +35,7 @@ function MyGoogleMap() {
     const [center, setCenter] = useState([]);
     const [zoom, setZoom] = useState(9);
     const [places, setPlaces] = useState([]);
+    const [recoms, setRecoms] = useState([]);
 
     const onMapChange = (center, zoom) => {
         console.log("center:", center);
@@ -71,13 +72,14 @@ function MyGoogleMap() {
                         onGoogleApiLoaded={({map, maps}) => apiHasLoaded(map, maps)}
                     >
 
-                        {MeetMarkerRenderer(meetState)}
-                        {LocationMarkerRenderer(places)}
+                    {MeetMarkerRenderer(meetState)}
+                    {LocationMarkerRenderer(places)}
+                    {/* {MeetMarkerRenderer(recoms)} */}
                     </GoogleMapReact>
                 </div>
                 <div className="col-6">
                     <AddressSidebar mapState={mapState} meetState={meetState} setMeetState={setMeetState}
-                                    places={places} setPlaces={setPlaces} setCenter={setCenter} setZoom={setZoom}/>
+                                    places={places} recoms={recoms} setPlaces={setPlaces} setRecoms={setRecoms} setCenter={setCenter} setZoom={setZoom}/>
                 </div>
 
 
