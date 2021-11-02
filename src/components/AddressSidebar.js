@@ -6,7 +6,7 @@ import AddressRenderer from './AddressRenderer';
 import NearbySearch from "./NearbySearch";
 
 
-export default function AddressSidebar({ mapState, meetState, setMeetState, places, setPlaces, setCenter, setZoom }) {
+export default function AddressSidebar({ mapState, meetState, setMeetState, places, setPlaces, recoms, setRecoms, setCenter, setZoom }) {
 
     const addPlace = (place, mapState, places, setPlaces, setZoom) => {
         const { mapApi } = mapState;
@@ -56,12 +56,16 @@ export default function AddressSidebar({ mapState, meetState, setMeetState, plac
                     <CalculateCenter places={places} mapState={mapState} setMeetState={setMeetState}
                         setCenter={setCenter} />
                 </div>
-                <div>
-                    <NearbySearch meetState={meetState} radius={1500}
-                                  type={'restaurant'} keyword={''} mapState={mapState}></NearbySearch>
-                </div>
-
                 <MeetingLocation meetState={meetState}></MeetingLocation>
+                <div className="card m-2 p-2 scroll">
+                    <NearbySearch meetState={meetState} radius={500} setRecoms={setRecoms}
+                                  type={'restaurant'} keyword={''} mapState={mapState}></NearbySearch>
+                    {recoms.map((recom) => (
+                        <div>
+                            {recom.name}
+                        </div>
+                    ))}
+                </div>
             </>
         )
     } else return (<></>);
