@@ -1,4 +1,4 @@
-import {queryAllByTestId, queryByTestId, render} from "@testing-library/react";
+import {queryAllByTestId, queryByTestId, getByTestId, render} from "@testing-library/react";
 import { LocationMarkerRenderer, MeetMarkerRenderer } from "../components/MarkersRenderer";
 
 describe("Markers Renderer Test", () => {
@@ -51,5 +51,31 @@ describe("Markers Renderer Test", () => {
         }/>);
         const text = queryByTestId("meetMarker");
         expect(text).toBeTruthy();
+    })
+    
+    it("should create a meeting marker that is different from a location marker", () => {
+        const places = [
+            {
+                address: "533 Davis St",
+                lat: 20,
+                lng: 30
+            }
+        ]   
+        var {queryByTestId} = render(LocationMarkerRenderer(places));
+        const locText = queryByTestId("locationMarker");
+        var {queryByTestId} = render(<MeetMarkerRenderer meetState={
+            {
+                meet_loc_lat: 10,
+                meet_loc_lng: 20,
+                meet_address: "855 Hinman Ave.",
+                meet_types: ["premise"]
+            }
+        }/>)
+        const meetText = queryByTestId("meetMarker");
+        //console.log(locText.className);
+        //console.log(meetText.className);
+        //compares the className of meeting markers and location markers
+        expect(locText.className !=meetText.className).toBeTruthy();
+
     })
 })
