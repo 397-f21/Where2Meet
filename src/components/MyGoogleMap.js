@@ -52,7 +52,7 @@ function MyGoogleMap() {
         });
     };
     const key = useData('Google_API_Key/Gan_Qiu')[0];
-    console.log(key);
+    // console.log(key);
     if (!key) {
         return null;
     }
