@@ -10,8 +10,6 @@ import {LocationMarkerRenderer, MeetMarkerRenderer} from './MarkersRenderer';
 
 import AddressSidebar from './AddressSidebar';
 
-import NearbySearch from "./NearbySearch";
-
 
 // Get Current Location Coordinates
 function MyGoogleMap() {
@@ -78,11 +76,6 @@ function MyGoogleMap() {
                     <AddressSidebar mapState={mapState} meetState={meetState} setMeetState={setMeetState}
                                     places={places} setPlaces={setPlaces} setCenter={setCenter} setZoom={setZoom}/>
                 </div>
-                {mapState.mapApiLoaded ?
-                    <NearbySearch lat={meetState.meet_loc_lat} lng={meetState.meet_loc_lng} radius={1500}
-                                  type={'restaurant'} keyword={''} map={mapState.mapInstance}></NearbySearch>
-                    : <></>
-                }
 
 
             </div>

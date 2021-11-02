@@ -3,6 +3,7 @@ import AutoComplete from "./Autocomplete";
 import CalculateCenter from "./CalculateCenter";
 import MeetingLocation from "./MeetingLocation";
 import AddressRenderer from './AddressRenderer';
+import NearbySearch from "./NearbySearch";
 
 
 export default function AddressSidebar({ mapState, meetState, setMeetState, places, setPlaces, setCenter, setZoom }) {
@@ -54,6 +55,10 @@ export default function AddressSidebar({ mapState, meetState, setMeetState, plac
                 <div>
                     <CalculateCenter places={places} mapState={mapState} setMeetState={setMeetState}
                         setCenter={setCenter} />
+                </div>
+                <div>
+                    <NearbySearch meetState={meetState} radius={1500}
+                                  type={'restaurant'} keyword={''} mapState={mapState}></NearbySearch>
                 </div>
 
                 <MeetingLocation meetState={meetState}></MeetingLocation>
