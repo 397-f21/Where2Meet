@@ -6,10 +6,9 @@ import GoogleMapReact from 'google-map-react';
 
 import {MapWrapper} from '../utils/wrappers';
 
-import {LocationMarkerRenderer, MeetMarkerRenderer} from './MarkersRenderer';
+import {LocationMarkerRenderer, MeetMarkerRenderer, RecommendationsMarkerRenderer} from './MarkersRenderer';
 
 import AddressSidebar from './AddressSidebar';
-
 
 // Get Current Location Coordinates
 function MyGoogleMap() {
@@ -71,7 +70,8 @@ function MyGoogleMap() {
 
                     {MeetMarkerRenderer(meetState)}
                     {LocationMarkerRenderer(places)}
-                    {/* {MeetMarkerRenderer(recoms)} */}
+                    {/* {LocationMarkerRenderer(recoms)} */}
+                    {RecommendationsMarkerRenderer(recoms)}
                     </GoogleMapReact>
                 </div>
                 <div className="col-6">

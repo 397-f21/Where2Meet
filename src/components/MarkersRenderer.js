@@ -25,3 +25,17 @@ export const MeetMarkerRenderer = ( meetState ) => {
         )
     }    
 }
+
+export const RecommendationsMarkerRenderer = ( recoms ) => {
+    if (recoms) {
+        return (
+            recoms.map((recom) => (
+                <Marker2
+                    text={"PLACEHOLDER"}
+                    lat={recom.lat()}
+                    lng={recom.lng()}
+                />
+            ))
+        )
+    }    
+}
