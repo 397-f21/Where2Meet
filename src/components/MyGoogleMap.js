@@ -9,6 +9,7 @@ import {MapWrapper} from '../utils/wrappers';
 import {LocationMarkerRenderer, MeetMarkerRenderer} from './MarkersRenderer';
 
 import AddressSidebar from './AddressSidebar';
+import {useData} from "../utils/firebase";
 
 
 // Get Current Location Coordinates
@@ -49,7 +50,10 @@ function MyGoogleMap() {
             mapApi: maps,
         });
     };
-
+    const key = useData('Google_API_Key/Gefei_Tan')[0];
+    if (!key) {
+        return null;
+    }
     return (
         <MapWrapper>
             <div className="row row-header">
@@ -60,8 +64,7 @@ function MyGoogleMap() {
                         onChange={({center, zoom}) => onMapChange(center, zoom)}
                         onChildClick={() => console.log('child click')}
                         bootstrapURLKeys={{
-                            // key: 'AIzaSyB3L47aJjmVQz2c0hoDP6WYD-qRaNKdnQU',
-                            key: 'AIzaSyC2zd1sMFSwFobbSa4QBTrYfY2NSbD7R6Q', //Gefei
+                            key: key,
                             libraries: ['places', 'geometry'],
                         }}
                         yesIWantToUseGoogleMapApiInternals
