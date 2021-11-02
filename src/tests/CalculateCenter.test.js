@@ -13,4 +13,16 @@ describe("Calculate Center Test", () => {
       const input = queryByTestId("calculateButton");
       expect(input).toBeFalsy();
     })
+
+    it("For any two locations, check that the Midpoint is equidistant from those locations", () => {
+      //Code Here
+      // const {queryByTestId} = render(<CalculateCenter places={[1, 5]}/>);
+      // const input = queryByTestId("calculateButton");
+      // expect(input).toBeFalsy();
+    })
+
+    it("After the Midpoint is calculated from two points with the same location, check that the Midpoint is also that location", () => {
+      //Code Here
+    })
+    
 })

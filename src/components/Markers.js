@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { UserPinWrapper, CenterPinWrapper } from '../utils/wrappers';
 
 export const Marker = ({ text, onClick }) => (
-    <UserPinWrapper
+    <UserPinWrapper data-testid="locationMarker"
         alt={text}
         onClick={onClick}
     />
@@ -20,7 +20,7 @@ Marker.propTypes = {
 };
 
 export const Marker2 = ({ text, onClick }) => (
-    <CenterPinWrapper
+    <CenterPinWrapper data-testid="meetMarker"
         alt={text}
         onClick={onClick}
     />
