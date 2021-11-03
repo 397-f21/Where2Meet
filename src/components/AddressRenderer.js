@@ -1,18 +1,27 @@
 import React from 'react';
+import './AddressSidebar.css';
 
-const AddressRenderer = ({ places }) => (
+const AddressRenderer = ({ places, setPlaces }) => (
     <>
         {places.length > 0
             ?
-            <div data-testid="addressList">
+            <ul data-testid="addressList">
                 {places.map((place, ind) => (
-                    <div className="card-text" id={`${place.address.split(' ')[1]}${ind}`} key={ind}>
+                    <li className="card-text" align="left" id={`${place.address.split(' ')[1]}${ind}`} key={ind}>
                         <b>Person {ind + 1}:</b> <span>{place.address}</span>
-                    </div>
+                        <button class='deleteMe' onClick={() => del(places, setPlaces, ind)}>X</button>
+                    </li>
                 ))}
-            </div>
+            </ul>
             : <> </>}
     </>
 );
+
+function del (places, setPlaces, ind) {
+    console.log("Del pressed!");
+    setPlaces([...places.filter(function(val, i) {
+        return i !== ind
+    })])
+}
 
 export default AddressRenderer;

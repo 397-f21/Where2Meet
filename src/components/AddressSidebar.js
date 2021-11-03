@@ -56,7 +56,7 @@ export default function AddressSidebar({ mapState, meetState, setMeetState, plac
                             src="https://icon-library.com/images/pin-icon-png/pin-icon-png-9.jpg"
                             alt="new"></img>People:
                         </h5>
-                        <AddressRenderer places={places} />
+                        <AddressRenderer places={places} setPlaces={setPlaces} />
                     </div>
                 }
                 <div>
