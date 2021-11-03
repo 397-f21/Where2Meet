@@ -79,7 +79,8 @@ function MyGoogleMap() {
                 </div>
                 <div className="col-6">
                     <AddressSidebar mapState={mapState} meetState={meetState} setMeetState={setMeetState}
-                                    places={places} recoms={recoms} setPlaces={setPlaces} setRecoms={setRecoms} setCenter={setCenter} setZoom={setZoom}/>
+                                    places={places} recoms={recoms} setPlaces={setPlaces} setRecoms={setRecoms} 
+                                    setCenter={setCenter} setZoom={setZoom}/>
                 </div>
 
 

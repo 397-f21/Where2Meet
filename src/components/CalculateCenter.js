@@ -55,6 +55,7 @@ export default function CalculateCenter({places, mapState, setMeetState, setCent
                         // window.alert('You are in the middle of no where');
                     }
                     console.log("Meet Location: ", results[0].formatted_address)
+                    console.log("result looks like: ", results);
                     setMeetState({
                         meet_loc_lat: lat,
                         meet_loc_lng: lng,

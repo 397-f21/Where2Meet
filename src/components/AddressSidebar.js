@@ -4,6 +4,7 @@ import CalculateCenter from "./CalculateCenter";
 import MeetingLocation from "./MeetingLocation";
 import AddressRenderer from './AddressRenderer';
 import NearbySearch from "./NearbySearch";
+import { LocateMe } from "./LocateMe";
 import { set } from "@firebase/database";
 
 
@@ -18,6 +19,8 @@ export default function AddressSidebar({ mapState, meetState, setMeetState, plac
         const geocoder = new mapApi.Geocoder();
         const lat = place.geometry.location.lat();
         const lng = place.geometry.location.lng();
+
+        console.log("Place looks like: ", place);
 
         geocoder.geocode({ 'location': { lat: lat, lng: lng } }, (results, status) => {
             console.log(results);
@@ -46,9 +49,15 @@ export default function AddressSidebar({ mapState, meetState, setMeetState, plac
     if (mapState.mapApiLoaded) {
         return (
             <>
-                <div>
-                    <AutoComplete map={mapState.mapInstance} mapApi={mapState.mapApi}
-                        addplace={(place) => addPlace(place, mapState, places, setPlaces, setZoom)} />
+                <div class="row m-1">
+                    <div className="col-md-11">
+                        <AutoComplete map={mapState.mapInstance} mapApi={mapState.mapApi}
+                            addplace={(place) => addPlace(place, mapState, places, setPlaces, setZoom)} />
+                    </div>
+                    <div className="col-md-1">
+                        <LocateMe mapState={mapState} places={places} setPlaces={setPlaces} setZoom={setZoom} />
+                    </div>
+
                 </div>
                 {places.length === 0 ? null : 
                     <div className="card m-2 p-2 scroll">
@@ -70,12 +79,11 @@ export default function AddressSidebar({ mapState, meetState, setMeetState, plac
                                     type={'restaurant'} keyword={''} mapState={mapState}></NearbySearch>
                         
                         <div class="row m-1">
-
-                        {recoms.map((recom) => (
-                            <div className="card p-1 col-md-6 col-sm-12" onClick={() => {recenter(recom.lat(), recom.lng())}}>
-                                {recom.name}
-                            </div>
-                        ))}
+                            {recoms.map((recom) => (
+                                <div className="card p-1 col-md-6 col-sm-12" onClick={() => {recenter(recom.lat(), recom.lng())}}>
+                                    {recom.name}
+                                </div>
+                            ))}
                         </div>
 
                     </div>
