@@ -50,32 +50,36 @@ export default function AddressSidebar({ mapState, meetState, setMeetState, plac
                     <AutoComplete map={mapState.mapInstance} mapApi={mapState.mapApi}
                         addplace={(place) => addPlace(place, mapState, places, setPlaces, setZoom)} />
                 </div>
-                <div className="card m-2 p-2 scroll">
-                    <h5 className="card-title"><img className="redPin"
-                        src="https://icon-library.com/images/pin-icon-png/pin-icon-png-9.jpg"
-                        alt="new"></img>People:
-                    </h5>
-                    <AddressRenderer places={places} />
-                </div>
+                {places.length === 0 ? null : 
+                    <div className="card m-2 p-2 scroll">
+                        <h5 className="card-title"><img className="redPin"
+                            src="https://icon-library.com/images/pin-icon-png/pin-icon-png-9.jpg"
+                            alt="new"></img>People:
+                        </h5>
+                        <AddressRenderer places={places} />
+                    </div>
+                }
                 <div>
                     <CalculateCenter places={places} mapState={mapState} setMeetState={setMeetState}
                         setCenter={setCenter} />
                 </div>
                 <MeetingLocation meetState={meetState}></MeetingLocation>
-                <div className="card m-2 p-2 scroll">
-                    <NearbySearch meetState={meetState} radius={500} setRecoms={setRecoms}
-                                  type={'restaurant'} keyword={''} mapState={mapState}></NearbySearch>
-                    
-                    <div class="row m-1">
+                {!meetState?.meet_address || meetState?.meet_types?.includes('plus_code') ? null : 
+                    <div className="card m-2 p-2 scroll">
+                        <NearbySearch meetState={meetState} radius={500} setRecoms={setRecoms}
+                                    type={'restaurant'} keyword={''} mapState={mapState}></NearbySearch>
+                        
+                        <div class="row m-1">
 
-                    {recoms.map((recom) => (
-                        <div className="card p-1 col-md-6 col-sm-12" onClick={() => {recenter(recom.lat(), recom.lng())}}>
-                            {recom.name}
+                        {recoms.map((recom) => (
+                            <div className="card p-1 col-md-6 col-sm-12" onClick={() => {recenter(recom.lat(), recom.lng())}}>
+                                {recom.name}
+                            </div>
+                        ))}
                         </div>
-                    ))}
-                    </div>
 
-                </div>
+                    </div>
+                }
             </>
         )
     } else return (<></>);
