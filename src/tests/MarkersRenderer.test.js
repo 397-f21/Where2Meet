@@ -1,5 +1,5 @@
 import {queryAllByTestId, queryByTestId, getByTestId, render} from "@testing-library/react";
-import { LocationMarkerRenderer, MeetMarkerRenderer } from "../components/MarkersRenderer";
+import { LocationMarkerRenderer, MeetMarkerRenderer, RecommendationsMarkerRenderer } from "../components/MarkersRenderer";
 
 describe("Markers Renderer Test", () => {
     it("should create one location marker for one location", () => {
@@ -75,7 +75,42 @@ describe("Markers Renderer Test", () => {
         //console.log(locText.className);
         //console.log(meetText.className);
         //compares the className of meeting markers and location markers
-        expect(locText.className !=meetText.className).toBeTruthy();
+        expect(locText.className != meetText.className).toBeTruthy();
 
     })
+
+
+    it("should create one reommendation marker for one location", () => {
+        const places = [
+            {
+                address: "855 Hinman Ave.",
+                lat: () => 10,
+                lng: () => 20
+            }
+        ]   
+        var {queryByTestId} = render(RecommendationsMarkerRenderer(places));
+        const marker = queryByTestId("recommendationMarker");
+        expect(marker).toBeTruthy();
+    })
+
+
+    it("should create one reommendation marker for two location", () => {
+        const places = [
+            {
+                address: "855 Hinman Ave.",
+                lat: () => 10,
+                lng: () => 20
+            },
+            {
+                address: "811 Hinman Ave.",
+                lat: () => 10,
+                lng: () => 20
+            }
+        ]   
+        var {queryAllByTestId} = render(RecommendationsMarkerRenderer(places));
+        const markers = queryAllByTestId("recommendationMarker");
+        expect(markers).toHaveLength(2);
+    })
+
+
 })
