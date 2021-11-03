@@ -5,7 +5,7 @@ const AutoCompleteWrapper = styled.div`
   align-items: center;
   justify-content: center;
   width: 100%;
-  padding: 20px;
+  padding: 10px;
   text-align:center;
 `;
 

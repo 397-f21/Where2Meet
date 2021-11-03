@@ -9,7 +9,7 @@ const AddressRenderer = ({ places, setPlaces }) => (
                 {places.map((place, ind) => (
                     <li className="card-text" align="left" id={`${place.address.split(' ')[1]}${ind}`} key={ind}>
                         <b>Person {ind + 1}:</b> <span>{place.address}</span>
-                        <button class='deleteMe' onClick={() => del(places, setPlaces, ind)}>X</button>
+                        <button class="btn btn-secondary" className="button" onClick={() => del(places, setPlaces, ind)}>X</button>
                     </li>
                 ))}
             </ul>

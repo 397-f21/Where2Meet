@@ -1,15 +1,12 @@
 // MyGoogleMaps.js
 import React, {useState, useEffect} from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-
 import GoogleMapReact from 'google-map-react';
-
 import {MapWrapper} from '../utils/wrappers';
-
 import {LocationMarkerRenderer, MeetMarkerRenderer, RecommendationsMarkerRenderer} from './MarkersRenderer';
-
 import AddressSidebar from './AddressSidebar';
 import {useData} from "../utils/firebase";
+import { GetLocations } from './GetLocations';
 
 // Get Current Location Coordinates
 function MyGoogleMap() {
@@ -59,6 +56,7 @@ function MyGoogleMap() {
         <MapWrapper>
             <div className="row row-header">
                 <div className="col-6" style={{height: '65vh', width: '50%'}}>
+                    <GetLocations mapState={mapState} places={places} setPlaces={setPlaces} setZoom={setZoom} />
                     <GoogleMapReact
                         center={center}
                         zoom={zoom}

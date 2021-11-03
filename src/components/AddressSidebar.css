@@ -1,12 +1,14 @@
 ul li {
   list-style: none;
-  background: gray;
-  margin: 2px;
+  background: rgb(241, 218, 4);
+  margin: 5px;
   border-radius: 5px;
   padding: 5px;
 }
 
-button {
+.button {
   float: right;
-  /* background: white; */
+  border-radius: 30px;
+  font-size: 12px;
+  background: rgb(229, 232, 236);
 }

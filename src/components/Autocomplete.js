@@ -59,7 +59,7 @@ class AutoComplete extends Component {
                         onFocus={this.clearSearchBox}
                         placeholder="Enter a location"
                     />
-                </div>
+                </div> 
             </AutoCompleteWrapper>
         );
     }
