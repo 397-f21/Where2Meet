@@ -4,7 +4,7 @@ import {rad2degr, degr2rad} from '../utils/utils';
 
 export default function CalculateCenter({places, mapState, setMeetState, setCenter}) {
 
-    if (places.length < 2) return "Add at least 2 locations to calculate the meeting location";
+    if (places.length < 2) return <> Add at least 2 locations to calculate the meeting location </>;
 
     const getLatLngCenter = () => {
         var places_length = places.length

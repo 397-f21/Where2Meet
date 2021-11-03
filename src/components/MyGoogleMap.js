@@ -55,7 +55,7 @@ function MyGoogleMap() {
     return (
         <MapWrapper>
             <div className="row row-header">
-                <div className="col-6" style={{height: '65vh', width: '50%'}}>
+                <div className="col-12 col-md-6" style={{height: '63vh'}}>
                     <GetLocations mapState={mapState} places={places} setPlaces={setPlaces} setZoom={setZoom} />
                     <GoogleMapReact
                         center={center}
@@ -75,7 +75,7 @@ function MyGoogleMap() {
                     {RecommendationsMarkerRenderer(recoms)}
                     </GoogleMapReact>
                 </div>
-                <div className="col-6">
+                <div className="col-12 col-md-6">
                     <AddressSidebar mapState={mapState} meetState={meetState} setMeetState={setMeetState}
                                     places={places} recoms={recoms} setPlaces={setPlaces} setRecoms={setRecoms} 
                                     setCenter={setCenter} setZoom={setZoom}/>
