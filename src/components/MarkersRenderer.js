@@ -1,4 +1,4 @@
-import {Marker, Marker2} from './Markers';
+import {Marker, Marker2, Marker3} from './Markers';
 
 export const LocationMarkerRenderer = ( places ) => {
     console.log("marker places now: ", places);
@@ -30,7 +30,7 @@ export const RecommendationsMarkerRenderer = ( recoms ) => {
     if (recoms) {
         return (
             recoms.map((recom) => (
-                <Marker2
+                <Marker3
                     text={"PLACEHOLDER"}
                     lat={recom.lat()}
                     lng={recom.lng()}

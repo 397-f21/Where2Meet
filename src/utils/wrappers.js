@@ -41,10 +41,26 @@ const CenterPinWrapper = styled.div`
   cursor: grab;
 `;
 
+const RecommendationPinMarker = styled.div`
+  position: absolute;
+  width: 38px;
+  height: 37px;
+  background-image: url(https://icon-library.com/images/pin-icon-png/pin-icon-png-15.jpg);
+  background-size: contain;
+  background-repeat: no-repeat;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  cursor: grab;
+`;
+
 const MapWrapper = styled.main`
   width: 100%;
   height: 100%;
 `;
 
 
-export { AutoCompleteWrapper, UserPinWrapper, CenterPinWrapper, MapWrapper }
+export { AutoCompleteWrapper, UserPinWrapper, CenterPinWrapper, RecommendationPinMarker, MapWrapper }
