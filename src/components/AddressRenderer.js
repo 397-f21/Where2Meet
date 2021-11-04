@@ -5,7 +5,7 @@ const AddressRenderer = ({ places, setPlaces }) => (
     <>
         {places.length > 0
             ?
-            <ul data-testid="addressList">
+            <ul data-cy="addressesList" data-testid="addressList">
                 {places.map((place, ind) => (
                     <li className="card-text" align="left" id={`${place.address.split(' ')[1]}${ind}`} key={ind}>
                         <b>Person {ind + 1}:</b> <span>{place.address}</span>

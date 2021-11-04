@@ -7,7 +7,7 @@ import MyGoogleMap from './components/MyGoogleMap';
 function App() {
     return (
         <div className="App">
-            <header class="jumbotron">
+            <header data-cy="jumbotron" class="jumbotron">
                 <div class="container">
                     <div class="row row-header">
                         <div class="col-md-4 col-sm-12">

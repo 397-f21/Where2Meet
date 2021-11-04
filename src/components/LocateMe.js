@@ -37,7 +37,7 @@ export const LocateMe = ({place, mapState, places, setPlaces, setZoom}) => {
     
     return (
         <>
-            <button data-testid="LocateMeButton" className="btn btn-outline-secondary btn-sm m-3"
+            <button data-cy="LocateMe" data-testid="LocateMeButton" className="btn btn-outline-secondary btn-sm m-3"
                     onClick={locate}>
                 Locate Me!
             </button>
