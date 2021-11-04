@@ -21,7 +21,7 @@ describe("Meeting Location Test", () => {
     //         {
     //             mapApiLoaded: false,
     //             mapInstance: null,
-    //             mapApi: null,
+    //             mapApi: nul
     //             geoCoder: null,
     //         }}
     //         setMeetState={setMeetState}/>);
