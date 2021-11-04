@@ -39,7 +39,7 @@ export const LocateMe = ({place, mapState, places, setPlaces, setZoom}) => {
         <>
             <button data-testid="LocateMeButton" className="btn btn-outline-secondary btn-sm m-3"
                     onClick={locate}>
-                Locate Me!
+                Use My Location
             </button>
         </>
     )

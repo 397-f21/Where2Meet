@@ -40,7 +40,7 @@ const NearbySearch = ({meetState, radius, setRecoms, type, keyword, mapState}) =
     return (
         <>
             <div>
-                <img className="orangePin" src="https://icon-library.com/images/pin-icon-png/pin-icon-png-11.jpg" alt="nearby"></img>
+                <img className="orangePin" src="https://icon-library.com/images/pin-icon-png/pin-icon-png-11.jpg" alt="nearby"/>
                 {meetState.meet_address?
                     <button data-testid="searchButton" className="btn btn-outline-secondary btn-sm m-3"
                             onClick={search}>

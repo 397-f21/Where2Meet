@@ -16,8 +16,8 @@ export default function AddressSidebar({ mapState, meetState, setMeetState, plac
                 {places.length === 0 ? null : 
                     <div className="card m-2 p-2 scroll">
                         <h5 className="card-title"><img className="redPin"
-                            src="https://icon-library.com/images/pin-icon-png/pin-icon-png-9.jpg"
-                            alt="new"></img>People:
+    src="https://icon-library.com/images/pin-icon-png/pin-icon-png-9.jpg"
+    alt="new"/>People:
                         </h5>
                         <AddressRenderer places={places} setPlaces={setPlaces} />
                     </div>
