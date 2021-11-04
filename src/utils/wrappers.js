@@ -45,7 +45,7 @@ const RecommendationPinMarker = styled.div`
   position: absolute;
   width: 38px;
   height: 37px;
-  background-image: url(https://icon-library.com/images/pin-icon-png/pin-icon-png-15.jpg);
+  background-image: url(https://icon-library.com/images/pin-icon-png/pin-icon-png-11.jpg);
   background-size: contain;
   background-repeat: no-repeat;
   -webkit-user-select: none;

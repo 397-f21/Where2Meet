@@ -54,7 +54,7 @@
 }
 .search-input {
   font-size: 1.2em;
-  width: 80%;
+  width: 100%;
 }
 
 .jumbotron {
@@ -82,6 +82,11 @@
 
 .redPin {
   width: 38px;
+  height: 37px;
+}
+
+.orangePin {
+  width: 37px;
   height: 37px;
 }
 
