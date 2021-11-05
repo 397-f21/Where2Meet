@@ -26,14 +26,14 @@ export default function AddressSidebar({ mapState, meetState, setMeetState, plac
                     <CalculateCenter places={places} mapState={mapState} setMeetState={setMeetState}
                         setCenter={setCenter} />
                 </div>
-                <MeetingLocation meetState={meetState}></MeetingLocation>
+                <MeetingLocation meetState={meetState}/>
                 {!meetState?.meet_address || meetState?.meet_types?.includes('plus_code') ? null : 
                     <div className="card m-2 p-2 scroll">
-                        <NearbySearch meetState={meetState} radius={500} setRecoms={setRecoms}
-                                    type={'restaurant'} keyword={''} mapState={mapState}>
+                        <NearbySearch meetState={meetState}  setRecoms={setRecoms}
+                                    keyword={''} mapState={mapState}>
                         </NearbySearch>
                         
-                        <div class="row m-1">
+                        <div className="row m-1">
                             {recoms.map((recom) => (
                                 <div className="card p-1 col-md-6 col-sm-12" onClick={() => {recenter(recom.lat(), recom.lng())}}>
                                     {recom.name}
