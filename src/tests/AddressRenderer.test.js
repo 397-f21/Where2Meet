@@ -1,5 +1,6 @@
-import { render } from "@testing-library/react";
-import AddressRenderer from "../components/AddressRenderer";
+import { render, queryByTestId, getByTestId, screen, fireEvent, toBeEmpty } from "@testing-library/react";
+import {AddressRenderer, Wrapper} from "../components/AddressRenderer";
+import React, {useState, useEffect} from 'react';
 
 describe("Meeting Location Test", () => {
     it("should display a list of addresses if places have been entered", () => {
@@ -20,4 +21,16 @@ describe("Meeting Location Test", () => {
         const text = queryByTestId("addressList");
         expect(text).toBeFalsy();
     })
+
+    it("should remove the address when the 'X' button is clicked", () => {
+        var {queryAllByTestId} = render(<Wrapper/>);
+
+        const button = screen.getByTestId("DeleteButton");
+        fireEvent.click(button);
+
+        const afterText = queryAllByTestId("Address");
+        expect(afterText).toHaveLength(0);
+
+    });
+
 })
