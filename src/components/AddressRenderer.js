@@ -5,7 +5,10 @@ import './AddressSidebar.css';
 
 export const AddressRenderer = ({ places, setPlaces, meetState, mapState }) => {
 
-    const getEta = (origin) => {
+    const [etaIndex, setIndex] = useState(-1);
+    const [eta, setETA] = useState("");
+
+    const getEta = (origin, ind) => {
         if(!mapState.mapApiLoaded) {
             return;
         }
@@ -14,24 +17,33 @@ export const AddressRenderer = ({ places, setPlaces, meetState, mapState }) => {
         let destination = new window.google.maps.LatLng(meetState.meet_loc_lat,meetState.meet_loc_lng)
         service.getDistanceMatrix(
             {
-              origins: [origin],
+              origins: [loc],
               destinations: [destination],
               travelMode: 'WALKING'
             }, (response,status) => {
-                console.log(response,status)
+                setETA(response.rows[0].elements[0].duration.text);
+                console.log(response,status);
             }
         );
+        setIndex(ind)
     }
     return (<>
         {places.length > 0
             ?
             <ul data-testid="addressList">
                 {places.map((place, ind) => (
-                    <li data-testid= "Address" className="card-text" align="left" id={`${place.address.split(' ')[1]}${ind}`} key={ind}>
-                        <b>Person {ind + 1}:</b> <span>{place.address}</span>
-                        <button data-testid="DeleteButton" className="btn btn-secondary" className="button" onClick={() => del(places, setPlaces, ind)}>X</button>
-                        { meetState.meet_address ? <button data-testid="TravelTimeButton" className="btn btn-secondary" className="button" onClick={() =>getEta(place)}>ETA↓</button> : <> </>}
-                    </li>
+                    <>
+                        <li data-testid= "Address" className="card-text" align="left" id={`${place.address.split(' ')[1]}${ind}`} key={ind}>
+                            <b>Person {ind + 1}:</b> <span style={{textOverflow: 'ellipsis'}}>{place.address}</span>
+
+                            <span style={{width: '50px'}}>
+                                <button data-testid="DeleteButton" className="btn btn-secondary" className="button" onClick={() => del(places, setPlaces, ind)}>X</button>
+                                { meetState.meet_address ? <button data-testid="TravelTimeButton" className="btn btn-secondary" className="button" onClick={() =>getEta(place, ind)}>ETA↓</button> : <> </>}
+                            </span>
+                        </li>
+
+                        { etaIndex === ind ? <li> {eta} </li> : <> </>}
+                    </>
                 ))}
             </ul>
             : <> </>}
