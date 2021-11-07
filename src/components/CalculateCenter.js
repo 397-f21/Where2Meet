@@ -1,38 +1,12 @@
 import React from 'react';
 
-import {rad2degr, degr2rad} from '../utils/utils';
+import { getLatLngCenter} from '../utils/utils';
 
 export default function CalculateCenter({places, mapState, setMeetState, setCenter}) {
 
     if (places.length < 2) return <> Add at least 2 locations to calculate the meeting location </>;
 
-    const getLatLngCenter = () => {
-        var places_length = places.length
-        var sumX = 0;
-        var sumY = 0;
-        var sumZ = 0;
-
-        var lat;
-        var lng
-
-        for (var i = 0; i < places_length; i++) {
-            lat = degr2rad(places[i].lat);
-            lng = degr2rad(places[i].lng);
-            sumX += Math.cos(lat) * Math.cos(lng);
-            sumY += Math.cos(lat) * Math.sin(lng);
-            sumZ += Math.sin(lat);
-        }
-
-        var avgX = sumX / places_length;
-        var avgY = sumY / places_length;
-        var avgZ = sumZ / places_length;
-
-        lng = Math.atan2(avgY, avgX);
-        var hyp = Math.sqrt(avgX * avgX + avgY * avgY);
-        lat = Math.atan2(avgZ, hyp);
-
-        return [rad2degr(lat), rad2degr(lng)];
-    }
+    
 
     const generateAddressForCenter = (lat, lng) => {
         const {
@@ -73,7 +47,7 @@ export default function CalculateCenter({places, mapState, setMeetState, setCent
     }
 
     const onCalculate = () => {
-        const coords = getLatLngCenter();
+        const coords = getLatLngCenter(places);
         setMeetState({
             meet_loc_lat: coords[0],
             meet_loc_lng: coords[1],
