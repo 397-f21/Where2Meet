@@ -31,7 +31,7 @@ const NearbySearch = ({meetState, setRecoms, keyword, mapState}) => {
         console.log(status);
         if (status === window.google.maps.places.PlacesServiceStatus.OK) {
             console.log(results);
-            const recs = results.slice(0, 5).map((result) => {
+            const recs = results.slice(0, 6).map((result) => {
                 return {
                     name: result.name,
                     lat: result.geometry.location.lat,
@@ -111,6 +111,7 @@ const NearbySearch = ({meetState, setRecoms, keyword, mapState}) => {
                         /></div>
                     : <></>
                 }
+                <hr></hr>
             </div>
         </>
     )

@@ -94,4 +94,8 @@
     display: table-cell;
     vertical-align: middle;
 }
+
+.customizedCard {
+    min-height: 30vh;
+}
   

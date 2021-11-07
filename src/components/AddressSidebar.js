@@ -16,8 +16,8 @@ export default function AddressSidebar({ mapState, meetState, setMeetState, plac
                 {places.length === 0 ? null : 
                     <div className="card m-2 p-2 scroll">
                         <h5 className="card-title"><img className="redPin"
-    src="https://icon-library.com/images/pin-icon-png/pin-icon-png-9.jpg"
-    alt="new"/>People:
+                                                        src="https://icon-library.com/images/pin-icon-png/pin-icon-png-9.jpg"
+                                                        alt="new"/>People:
                         </h5>
                         <AddressRenderer places={places} setPlaces={setPlaces} />
                     </div>
@@ -28,14 +28,14 @@ export default function AddressSidebar({ mapState, meetState, setMeetState, plac
                 </div>
                 <MeetingLocation meetState={meetState}/>
                 {!meetState?.meet_address || meetState?.meet_types?.includes('plus_code') ? null : 
-                    <div className="card m-2 p-2 scroll">
+                    <div className="card m-2 p-2 scroll customizedCard">
                         <NearbySearch meetState={meetState}  setRecoms={setRecoms}
                                     keyword={''} mapState={mapState}>
                         </NearbySearch>
                         
-                        <div className="row m-1">
+                        <div className="row justify-content-md-center">
                             {recoms.map((recom) => (
-                                <div className="card p-1 col-md-6 col-sm-12" onClick={() => {recenter(recom.lat(), recom.lng())}}>
+                                <div className="card m-1 p-1 col-md-5 col-sm-12 bg-info" onClick={() => {recenter(recom.lat(), recom.lng())}}>
                                     {recom.name}
                                 </div>
                             ))}
