@@ -56,7 +56,7 @@ function MyGoogleMap() {
         <MapWrapper>
             <div className="row row-header">
                 <div className="col-12 col-md-6" style={{height: '63vh'}}>
-                    <GetLocations mapState={mapState} places={places} setPlaces={setPlaces} setZoom={setZoom} />
+                    <GetLocations setCenter={setCenter} mapState={mapState} places={places} setPlaces={setPlaces} setZoom={setZoom} />
                     <GoogleMapReact
                         center={center}
                         zoom={zoom}

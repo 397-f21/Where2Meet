@@ -1,7 +1,7 @@
 
 import AutoComplete from "./Autocomplete";
 import { LocateMe } from "./LocateMe";
-export const GetLocations = ({ mapState, places, setPlaces, setZoom }) =>{
+export const GetLocations = ({ setCenter, mapState, places, setPlaces, setZoom }) =>{
 
     const addPlace = (place, mapState, places, setPlaces, setZoom) => {
         const { mapApi } = mapState;
@@ -44,7 +44,7 @@ export const GetLocations = ({ mapState, places, setPlaces, setZoom }) =>{
                             addplace={(place) => addPlace(place, mapState, places, setPlaces, setZoom)} />
                     </div>
                     <div className="col-md-3">
-                        <LocateMe mapState={mapState} places={places} setPlaces={setPlaces} setZoom={setZoom} />
+                        <LocateMe setCenter={setCenter} mapState={mapState} places={places} setPlaces={setPlaces} setZoom={setZoom} />
                     </div>
     
                 </div>

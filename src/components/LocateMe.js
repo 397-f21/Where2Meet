@@ -1,6 +1,6 @@
 import React from "react";
 
-export const LocateMe = ({place, mapState, places, setPlaces, setZoom}) => {
+export const LocateMe = ({setCenter, mapState, places, setPlaces, setZoom}) => {
 
     const locate = () => {
         const { mapApi } = mapState;
@@ -16,6 +16,7 @@ export const LocateMe = ({place, mapState, places, setPlaces, setZoom}) => {
                 if (status === 'OK') {
                     if (results[0]) {
                         setZoom(15);
+                        setCenter([lat, lng])
                         const newPlace =
                         {
                             place: [],
