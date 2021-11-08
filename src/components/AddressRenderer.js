@@ -12,6 +12,7 @@ export const AddressRenderer = ({ places, setPlaces, meetState, mapState }) => {
     const [etaIndex, setIndex] = useState(-1);
     const [eta, setETA] = useState("");
     const [type, setType] = useState("DRIVING");
+    const [dirURL, setURL] = useState("");
     const animatedComponents = makeAnimated();
     const typeOptions = [
         { value: 'DRIVING', label: 'Driving' },
@@ -52,6 +53,9 @@ export const AddressRenderer = ({ places, setPlaces, meetState, mapState }) => {
         );
         setType(transitType);
         setIndex(ind)
+        setURL(`https://www.google.com/maps/dir/?api=1&origin=${origin.lat}%2C${origin.lng}&destination=${meetState.meet_loc_lat}%2C${meetState.meet_loc_lng}&travelmode=${transitType}`);
+        console.log("url:", dirURL);
+
     }
     return (<>
         {places.length > 0
@@ -98,6 +102,7 @@ export const AddressRenderer = ({ places, setPlaces, meetState, mapState }) => {
                                         >
                                         </Select>
                                         <span className="p-1 align-self-center">{eta !== "" ? `Estimated ${eta} to center` : 'Select a transit type'}</span>
+                                        <span className="p-1 align-self-center">{dirURL !== "" && eta !== "" ?  <a target="_blank" rel="noopener noreferrer" href={dirURL}>Check Direction</a> : "" }</span>
                                     </div>
                                 </>
                                 : null}
