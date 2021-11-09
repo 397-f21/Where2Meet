@@ -19,7 +19,7 @@ const NearbySearch = ({meetState, setRecoms, keyword, mapState}) => {
         {value: 500, label: '500m'},
         {value: 804, label: '0.5 miles'},
         {value: 1609, label: '1 mile'},
-        {value: 500, label: '1.5 miles'},
+        {value: 2400, label: '1.5 miles'},
         {value: 3218, label: '2 miles'},
     ];
     // const [recoms, setRecoms] = useState([]);
