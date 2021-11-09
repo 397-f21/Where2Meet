@@ -4,6 +4,7 @@ import MeetingLocation from "./MeetingLocation";
 import AddressRenderer from './AddressRenderer';
 import NearbySearch from "./NearbySearch";
 import { useEffect } from "react";
+import RecomList from "./RecomList";
 
 export default function AddressSidebar({ mapState, meetState, setMeetState, places, setPlaces, recoms, setRecoms, setCenter, setZoom }) {
     const recenter = (lat, lng) => {
@@ -46,13 +47,7 @@ export default function AddressSidebar({ mapState, meetState, setMeetState, plac
                                 keyword={''} mapState={mapState}>
                             </NearbySearch>
 
-                            <div className="row justify-content-md-center">
-                                {recoms.map((recom) => (
-                                    <div className="card m-1 p-1 col-md-5 col-sm-12 bg-info" onClick={() => { recenter(recom.lat(), recom.lng()) }}>
-                                        {recom.name}
-                                    </div>
-                                ))}
-                            </div>
+                            <RecomList recoms={recoms} recenter={recenter} />
 
                         </div>
                     </>
