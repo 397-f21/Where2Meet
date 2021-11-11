@@ -5,9 +5,6 @@ import { getLatLngCenter} from '../utils/utils';
 export default function CalculateCenter({places, mapState, setMeetState, setCenter}) {
 
     if (places.length < 2) return <> Add at least 2 locations to calculate the meeting location </>;
-
-    
-
     const generateAddressForCenter = (lat, lng) => {
         const {
             mapApi

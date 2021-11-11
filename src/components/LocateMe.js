@@ -45,7 +45,3 @@ export const LocateMe = ({setCenter, mapState, places, setPlaces, setZoom}) => {
         </>
     )
 }
-
-if ('geolocation' in navigator) {
-    
-}
