@@ -8,11 +8,4 @@ describe ('Test App', () => {
         cy.visit ('/');
         cy.get('[data-cy=LocateMe]').should('contain', 'Use My Location');
     });
-
-    it('shows Winter courses when Winter is selected', () => {
-        cy.visit ('/');
-        cy.get('[data-cy=LocateMe]').click();
-        cy.wait(10000);
-        cy.get('[data-cy=addressesList]').should('contain' ,'Person');
-    });
 });
