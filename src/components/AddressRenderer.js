@@ -60,7 +60,7 @@ export const AddressRenderer = ({ places, setPlaces, meetState, mapState }) => {
     return (<>
         {places.length > 0
             ?
-            <ul data-testid="addressList">
+            <ul data-cy="addressesList" data-testid="addressList">
                 {places.map((place, ind) => (
                     <>
                         <li data-testid="Address" className="card-text" id={`${place.address.split(' ')[1]}${ind}`} key={ind}>

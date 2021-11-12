@@ -6,13 +6,13 @@ describe ('Test App', () => {
 
     it ('opens with LocateMe Button', () => {
         cy.visit ('/');
-        cy.get('[data-cy=LocateMe]').should('contain', 'Locate Me!');
+        cy.get('[data-cy=LocateMe]').should('contain', 'Use My Location');
     });
 
     it('shows Winter courses when Winter is selected', () => {
         cy.visit ('/');
         cy.get('[data-cy=LocateMe]').click();
         cy.wait(5000);
-        cy.get('[data-cy=addressesList]').should('contain' ,'2240 Campus Dr, Evanston, IL 60201, USA');
+        cy.get('[data-cy=addressesList]').should('contain' ,'Person');
     });
 });
