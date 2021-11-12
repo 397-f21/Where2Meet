@@ -11,7 +11,7 @@ describe("Nearby Search Test", () => {
                 meet_address: "855 Hinman Ave",
                 meet_types: ["premise"]
             }
-        }/>);
+        } mapState = {{mapInstance: null}}/>);
         const text = queryByTestId("searchButton");
         expect(text).toBeTruthy();
     });
@@ -23,7 +23,7 @@ describe("Nearby Search Test", () => {
                 meet_address: null,
                 meet_types: ["premise"]
             }
-        }/>);
+        } mapState = {{mapInstance: null}}/>);
         const text = queryByTestId("searchButton");
         expect(text).toBeFalsy();
     })
