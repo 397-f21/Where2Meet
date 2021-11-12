@@ -19,7 +19,7 @@ export default function AddressSidebar({ mapState, meetState, setMeetState, plac
             meet_address: null,
             meet_types: null
         })
-    }, [places])
+    }, [places, setMeetState])
 
     if (mapState.mapApiLoaded) {
         return (

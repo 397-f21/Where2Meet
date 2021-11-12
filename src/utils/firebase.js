@@ -1,6 +1,6 @@
 import {initializeApp} from "firebase/app";
 import {useState, useEffect} from "react";
-import {getDatabase, ref, onValue, set, push} from "firebase/database";
+import {getDatabase, ref, onValue, set} from "firebase/database";
 // Set the configuration for your app
 // TODO: Replace with your app's config object
 const firebaseConfig = {

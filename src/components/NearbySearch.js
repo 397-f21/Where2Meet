@@ -2,6 +2,7 @@ import React, {useEffect} from 'react';
 import {useState} from 'react';
 import Select from 'react-select';
 import makeAnimated from 'react-select/animated';
+import { useCallback } from 'react';
 
 const NearbySearch = ({meetState, setRecoms, keyword, mapState}) => {
 
@@ -27,6 +28,7 @@ const NearbySearch = ({meetState, setRecoms, keyword, mapState}) => {
     let lat = meetState.meet_loc_lat;
     let lng = meetState.meet_loc_lng;
 
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     function callback(results, status) {
         console.log(status);
         if (status === window.google.maps.places.PlacesServiceStatus.OK) {
@@ -43,13 +45,10 @@ const NearbySearch = ({meetState, setRecoms, keyword, mapState}) => {
     }
 
     // if type and radius changed, run this hook
-    useEffect(() => {
-        if (mapState?.mapApiLoaded) {
-            search();
-        }
-    }, [type, radius]);
 
-    const search = () => {
+    const search = useCallback(() => {
+
+
         let loc = new window.google.maps.LatLng(lat, lng);
         let request = {
             location: loc,
@@ -61,7 +60,20 @@ const NearbySearch = ({meetState, setRecoms, keyword, mapState}) => {
 
         let service = new window.google.maps.places.PlacesService(mapState.mapInstance);
         service.nearbySearch(request, callback);
-    }
+    }, [callback, keyword, lat, lng, mapState.mapInstance, radius, type]);
+
+    useEffect(() => {
+        if (mapState?.mapApiLoaded) {
+            search();
+        }
+    }, [type, radius, mapState?.mapApiLoaded, search]);
+
+
+
+
+
+
+
 
 
     // Store the selection in to a state

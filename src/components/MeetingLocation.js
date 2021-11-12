@@ -15,5 +15,4 @@ const MeetingLocation = ({meetState}) => {
 
 }
 
-
 export default MeetingLocation;
