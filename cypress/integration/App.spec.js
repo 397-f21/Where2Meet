@@ -12,7 +12,7 @@ describe ('Test App', () => {
     it('shows Winter courses when Winter is selected', () => {
         cy.visit ('/');
         cy.get('[data-cy=LocateMe]').click();
-        cy.wait(5000);
+        cy.wait(10000);
         cy.get('[data-cy=addressesList]').should('contain' ,'Person');
     });
 });
